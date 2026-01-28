@@ -1,0 +1,10 @@
+//go:build !prod
+// +build !prod
+
+package config
+
+func Load() *Config {
+	cfg := loadBase()
+	cfg.Environment = Dev
+	return cfg
+}

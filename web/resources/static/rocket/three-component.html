@@ -1,0 +1,143 @@
+<template
+  data-rocket:three-component
+  data-import:esm-three="three"
+  data-import:esm-ocontrols="three/addons/controls/OrbitControls.js"
+  data-props:x="int|clamp:1,100|=0"
+  data-props:y="int|clamp:1,100|=0"
+  data-props:z="int|clamp:1,100|=0"
+  data-props:height="int|clamp:1,100|=0"
+  data-props:width="int|clamp:1,100|=0"
+  data-props:depth="int|clamp:1,100|=0"
+>
+  <style>
+    .three-container {
+      color: var(--color-base-content);
+      height: 100%;
+      width: 100%;
+    }
+
+    #c {
+      height: 100%;
+      width: 100%;
+      display: block;
+    }
+
+    .debug {
+      position: absolute;
+      color: var(--color-base-content);
+      padding: 1rem;
+    }
+  </style>
+  <div class="debug">
+    <div>x:<span data-text="$$x"></span></div>
+    <div>y:<span data-text="$$y"></span></div>
+    <div>z:<span data-text="$$z"></span></div>
+    <div>width:<span data-text="$$width"></span></div>
+    <div>height:<span data-text="$$height"></span></div>
+    <div>depth:<span data-text="$$depth"></span></div>
+  </div>
+  <div class="three-container">
+    <canvas id="c"></canvas>
+  </div>
+  <script>
+    console.log($$x);
+    console.log($$y);
+    console.log($$z);
+
+    function main() {
+      // init
+      const canvas = document.querySelector('#c');
+      const renderer = new three.WebGLRenderer({ antialias: true, canvas });
+
+      // camera
+      const fov = 75;
+      const aspect = 2; // the canvas default
+      const near = 0.1;
+      const far = 10;
+      const camera = new three.PerspectiveCamera(fov, aspect, near, far);
+      camera.position.z = 2;
+
+      const controls = new ocontrols.OrbitControls(camera, renderer.domElement);
+      controls.update();
+
+      // scene
+      const scene = new three.Scene();
+
+      {
+        // light
+        const color = 0xffffff;
+        const intensity = 3;
+        const light = new three.DirectionalLight(color, intensity);
+        light.position.set(-1, 2, 4);
+        scene.add(light);
+      }
+
+      // box geometry
+      const boxWidth = $$width;
+      const boxHeight = $$height;
+      const boxDepth = $$depth;
+      const geometry = new three.BoxGeometry(boxWidth, boxHeight, boxDepth);
+
+      // cube instance creator function
+      function makeInstance(geometry, color, x) {
+        const material = new three.MeshPhongMaterial({ color });
+
+        const cube = new three.Mesh(geometry, material);
+        scene.add(cube);
+
+        cube.position.x = x;
+
+        return cube;
+      }
+
+      const cubes = [
+        makeInstance(geometry, 0x44aa88, 0),
+        makeInstance(geometry, 0x8844aa, -2),
+        makeInstance(geometry, 0xaa8844, 2),
+      ];
+
+      // responsive
+      // handles HD-DPI displays
+      function resizeRendererToDisplaySize(renderer) {
+        const canvas = renderer.domElement;
+        const pixelRatio = window.devicePixelRatio;
+        const width = Math.floor(canvas.clientWidth * pixelRatio);
+        const height = Math.floor(canvas.clientHeight * pixelRatio);
+        const needResize = canvas.width !== width || canvas.height !== height;
+        if (needResize) {
+          renderer.setSize(width, height, false);
+        }
+
+        return needResize;
+      }
+
+      // render loop
+      function render(time) {
+        time *= 0.001;
+
+        controls.update();
+
+        if (resizeRendererToDisplaySize(renderer)) {
+          const canvas = renderer.domElement;
+          camera.aspect = canvas.clientWidth / canvas.clientHeight;
+          camera.updateProjectionMatrix();
+        }
+
+        cubes.forEach((cube, ndx) => {
+          const speed = 1 + ndx * 0.1;
+          const rot = time * speed;
+          cube.rotation.x = rot;
+          cube.rotation.y = rot;
+        });
+
+        renderer.render(scene, camera);
+
+        requestAnimationFrame(render);
+      }
+
+      requestAnimationFrame(render);
+    }
+
+    main();
+  </script>
+</template>

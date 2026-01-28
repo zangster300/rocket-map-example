@@ -1,0 +1,75 @@
+version: "3"
+
+env:
+  STATIC_DIR: "web/resources/static"
+
+tasks:
+  # The `build:` tasks below are used together for production builds of a project
+  build:templ:
+    cmds:
+      - go tool templ generate
+    sources:
+      - "**/*.templ"
+    generates:
+      - "**/*_templ.go"
+
+  build:web:
+    cmds:
+      - go run cmd/web/build/main.go
+    sources:
+      - "./web/libs/**/**/*.{html,css,ts}"
+    generates:
+      - "{{.STATIC_DIR}}/libs/**"
+
+  build:
+    cmds:
+      - go build -tags=prod -o bin/main ./cmd/web
+    deps:
+      - build:templ
+      - build:web
+
+  # Use this task to debug with the delve debugger
+  debug:
+    cmds:
+      - dlv exec ./bin/main
+    deps:
+      - build
+
+  # Use this task to download latest version of client libs
+  download:
+    cmds:
+      - go run cmd/downloader/main.go
+
+  # The `live:` tasks below are used together for development builds and will live-reload the server
+  live:templ:
+    cmds:
+      - go tool templ generate -watch
+
+  live:web:
+    cmds:
+      - go run cmd/web/build/main.go -watch
+
+  live:server:
+    cmds:
+      - |
+        go tool air  \
+         -build.cmd "go build -tags=dev -o tmp/bin/main ./cmd/web" \
+         -build.bin "tmp/bin/main" \
+         -build.include_ext "go,templ" \
+         -misc.clean_on_exit "true"
+
+  live:
+    deps:
+      - live:templ
+      - live:server
+      - live:web
+
+  run:
+    cmds:
+      - ./bin/main
+    deps:
+      - build
+
+  default:
+    cmds:
+      - task: live

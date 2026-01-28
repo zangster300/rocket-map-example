@@ -1,0 +1,25 @@
+package templating
+
+import (
+	"rocket-map-example/config"
+	"rocket-map-example/web/resources"
+)
+
+templ Document() {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+			<script type="module" src={ resources.StaticPath("datastar/datastar-pro-rocket.js") }></script>
+			<link href={ resources.StaticPath("css/index.css") } rel="stylesheet" type="text/css"/>
+			<script src="https://unpkg.com/maplibre-gl@^5.17.0/dist/maplibre-gl.js"></script>
+			<link href="https://unpkg.com/maplibre-gl@^5.17.0/dist/maplibre-gl.css" rel="stylesheet"/>
+		</head>
+		<body>
+			if config.Global.Environment == config.Dev {
+				<div data-init="@get('/reload', {retryMaxCount: Infinity, retryInterval:200, retryMaxWaitMs:200})"></div>
+			}
+			{ children... }
+		</body>
+	</html>
+}

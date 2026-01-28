@@ -1,0 +1,37 @@
+@import './map.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+:root {
+  --color-base: oklch(92.2% 0 0);
+  --color-base-content: oklab(23.863% -0.00091 -0.00228);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-base: oklab(23.863% -0.00091 -0.00228);
+    --color-base-content: oklch(92.2% 0 0);
+  }
+}
+
+html {
+  background-color: var(--color-base);
+  display: grid;
+  font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+  height: 100vh;
+  overflow: hidden;
+}
+
+main {
+  height: 100%;
+  width: 100%;
+}

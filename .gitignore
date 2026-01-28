@@ -1,0 +1,23 @@
+# Allowlisting
+# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
+*
+!*.go
+
+!/.gitignore
+
+
+!go.sum
+!go.mod
+
+!README.md
+!LICENSE
+
+!Taskfile.yml
+
+!*.templ
+**/*_templ.go
+
+!*.html
+!**/*.css
+
+!*/

@@ -1,0 +1,20 @@
+#map {
+    height: 100%;
+    width: 100%;
+    border: 1px solid gray;
+}
+
+.marker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.marker {
+    width: 10px;
+    height: 10px;
+    background: var(--marker-color);
+    border-radius: 50%;
+}

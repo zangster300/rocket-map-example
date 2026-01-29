@@ -1,7 +1,15 @@
-#map {
+map-component {
+    display: inline-block;
     height: 100%;
     width: 100%;
-    border: 1px solid gray;
+    padding: 0.5rem;
+
+    >div:first-child {
+        height: 100%;
+        width: 100%;
+        border: 1px solid gray;
+        border-radius: 0.25rem;
+    }
 }
 
 .marker-container {
@@ -13,8 +21,12 @@
 }
 
 .marker {
-    width: 10px;
-    height: 10px;
-    background: var(--marker-color);
-    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background-size: 40px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
 }

@@ -20,6 +20,7 @@ func SetupRoutes(ctx context.Context, mux *http.ServeMux) (err error) {
 
 	if err := errors.Join(
 		setupIndexRoute(ctx, mux),
+		setupMapRoute(ctx, mux),
 	); err != nil {
 		return fmt.Errorf("error setting up routes: %w", err)
 	}

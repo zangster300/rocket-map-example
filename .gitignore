@@ -18,6 +18,9 @@
 **/*_templ.go
 
 !*.html
-!**/*.css
+
+!web/resources/styles/*.css
+
+!data/*
 
 !*/

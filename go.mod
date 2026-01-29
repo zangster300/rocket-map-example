@@ -3,11 +3,13 @@ module rocket-map-example
 go 1.25
 
 require (
+	github.com/Jeffail/gabs/v2 v2.7.0
 	github.com/a-h/templ v0.3.977
 	github.com/benbjohnson/hashfs v0.2.2
 	github.com/evanw/esbuild v0.27.0
 	github.com/fsnotify/fsnotify v1.9.0
 	github.com/joho/godotenv v1.5.1
+	github.com/paulmach/orb v0.12.0
 	github.com/starfederation/datastar-go v1.0.3
 	golang.org/x/sync v0.19.0
 )
@@ -130,6 +132,7 @@ require (
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
 	github.com/zeebo/errs v1.4.0 // indirect
 	github.com/zeebo/xxh3 v1.0.2 // indirect
+	go.mongodb.org/mongo-driver v1.11.4 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/detectors/gcp v1.37.0 // indirect
 	go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc v0.63.0 // indirect

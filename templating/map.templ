@@ -1,0 +1,16 @@
+package templating
+
+import "rocket-map-example/types"
+
+type MarkerSignals struct {
+	Markers []types.MapMarker   `json:"markers"`
+}
+
+templ RocketMapComponent(id string, markers []types.MapMarker) {
+	<map-component
+		id={ id }
+		data-attr:markers={ templ.JSONString(markers) }
+	>
+		<div id="map"></div>
+	</map-component>
+}

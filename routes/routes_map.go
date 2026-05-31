@@ -30,7 +30,7 @@ func setupMapRoute(ctx context.Context, mux *http.ServeMux) error {
 	}
 
 	mux.HandleFunc("GET /markers", func(w http.ResponseWriter, r *http.Request) {
-		ticker := time.NewTicker(5000 * time.Millisecond)
+		ticker := time.NewTicker(1000 * time.Millisecond)
 		defer ticker.Stop()
 
 		numMembers := 20

@@ -10,15 +10,24 @@ templ Document() {
 	<html lang="en">
 		<head>
 			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
-			<script type="module" src={ resources.StaticPath("datastar/datastar-pro-rocket.js") }></script>
+			<script type="module" src={ resources.StaticPath("datastar/datastar-pro.js") }></script>
+			<script type="module" src={ resources.StaticPath("rocket/map-component.js") }></script>
 			<link href={ resources.StaticPath("css/index.css") } rel="stylesheet" type="text/css"/>
+			<link href="https://unpkg.com/maplibre-gl@^5.17.0/dist/maplibre-gl.css" rel="stylesheet"/>
+			<script type="importmap">
+				{
+					"imports": {
+						"datastar-pro": "/static/datastar/datastar-pro.js",
+						"maplibre-gl": "https://cdn.jsdelivr.net/npm/maplibre-gl@5.17.0/+esm"
+					}
+				}
+			</script>
 		</head>
 		<body>
 			if config.Global.Environment == config.Dev {
 				<div data-init="@get('/reload', {retryMaxCount: Infinity, retryInterval:200, retryMaxWaitMs:200})"></div>
 			}
 			{ children... }
-			@resources.StaticHTMLContent("rocket/map-component.html")
 		</body>
 	</html>
 }

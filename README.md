@@ -9,15 +9,18 @@
 go mod tidy
 ```
 
-2. Web Dependencies
+2.  Datastar Pro + Rocket
+
+- Grab [`datastar-pro.js`](https://data-star.dev/pro/download) and drop it into the `/web/resources/static/datastar/` directory
+
+3. Web Dependencies
 
 ```
 go run cmd/web/build/main.go
 ```
 
-3. Datastar Pro + Rocket
-
-Grab the `datastar-pro-rocket.js` file from the pro repo and drop it alongside the datastar bundle in `/web/resources/static/datastar/`
+- uses [`esbuild`](https://esbuild.github.io/api/#overview)
+- can be used to bundle dependencies
 
 ## Development Mode
 
@@ -28,7 +31,7 @@ go tool task live
 OR
 
 ```shell
-air -build.cmd "go build -tags=dev -o tmp/bin/main ./cmd/web" -build.bin "tmp/bin/main" -misc.clean_on_exit true -build.include_ext "go,templ"
+go tool air -build.cmd "go build -tags=dev -o tmp/bin/main ./cmd/web" -build.bin "tmp/bin/main" -misc.clean_on_exit true -build.include_ext "go,templ"
 
 # watch and rebuild web assets + hotreload
 go run cmd/web/build/main.go -watch

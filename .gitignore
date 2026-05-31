@@ -17,8 +17,8 @@
 !*.templ
 **/*_templ.go
 
-!*.html
 
+!web/resources/static/rocket/*.js
 !web/resources/styles/*.css
 
 !data/*

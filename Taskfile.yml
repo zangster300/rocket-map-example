@@ -38,7 +38,7 @@ tasks:
   # Use this task to download latest version of client libs
   download:
     cmds:
-      - go run cmd/downloader/main.go
+      - go run cmd/web/downloader/main.go
 
   # The `live:` tasks below are used together for development builds and will live-reload the server
   live:templ:
@@ -54,7 +54,7 @@ tasks:
       - |
         go tool air  \
          -build.cmd "go build -tags=dev -o tmp/bin/main ./cmd/web" \
-         -build.bin "tmp/bin/main" \
+         -build.entrypoint "tmp/bin/main" \
          -build.include_ext "go,templ" \
          -misc.clean_on_exit "true"
 

@@ -1,4 +1,4 @@
-import { rocket } from 'datastar-pro'
+import { rocket } from 'datastar-rocket'
 
 const { default: maplibregl } = await import(
     'https://cdn.jsdelivr.net/npm/maplibre-gl@5.18.0/+esm'

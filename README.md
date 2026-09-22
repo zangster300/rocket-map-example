@@ -5,13 +5,17 @@
 ## Setup
 
 1. Go
-```
+```shell
 go mod tidy
 ```
 
-2.  Datastar Pro + Rocket
+2.  Datastar + Rocket
 
-- Grab [`datastar-pro.js`](https://data-star.dev/pro/download) and drop it into the `/web/resources/static/datastar/` directory
+```shell
+task download # runs `go run cmd/web/downloader/main.go`
+```
+
+- Downloads the [`datastar-rocket.js`](https://data-star.dev/reference/rocket) bundle into the `/web/resources/static/datastar/` directory
 
 3. Web Dependencies
 
@@ -20,7 +24,6 @@ go run cmd/web/build/main.go
 ```
 
 - uses [`esbuild`](https://esbuild.github.io/api/#overview)
-- can be used to bundle dependencies
 
 ## Development Mode
 

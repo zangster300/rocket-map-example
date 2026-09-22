@@ -22,8 +22,8 @@ func main() {
 
 func run() error {
 	files := map[string]string{
-		"https://raw.githubusercontent.com/starfederation/datastar/v1.0.1/bundles/datastar.js":     resources.StaticDirectoryPath + "/datastar/datastar.js",
-		"https://raw.githubusercontent.com/starfederation/datastar/v1.0.1/bundles/datastar.js.map": resources.StaticDirectoryPath + "/datastar/datastar.js.map",
+		"https://cdn.jsdelivr.net/gh/starfederation/datastar@v1.0.4/bundles/datastar-rocket.js":           resources.StaticDirectoryPath + "/datastar/datastar-rocket.js",
+		"https://raw.githubusercontent.com/starfederation/datastar/v1.0.4/bundles/datastar-rocket.js.map": resources.StaticDirectoryPath + "/datastar/datastar-rocket.js.map",
 	}
 
 	directories := []string{
